@@ -7,7 +7,7 @@
 #include "std_msgs/String.h"
 #include "sensor_msgs/JointState.h"
 #include "geometry_msgs/Twist.h"
-#include "gait_energetics.h"
+#include "gait_energetics/gait_energetics.h"
 #include <ostream>
 #include <iostream>
 #include <fstream>

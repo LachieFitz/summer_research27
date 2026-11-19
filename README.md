@@ -10,6 +10,13 @@ Each of the 2023 team members (Luka Moran, Riley Groome, Tyler Groome) utilised 
 
 ![DT E](https://github.com/CaveX/CaveX2023/assets/110513531/8a3289da-5f09-4349-ab33-c5103d64f9eb)
 
+
+### Summer 26/27 Addition
+To support software development on devices other then the 
+CaveX designated computer, a Docker development container 
+was developed. The container creates the Ubuntu 20.04 environment aswell as installing all required dependancies for arachnida_ws and openshc_ws. The dev container has not yet been validated across multiple machines.
+
+
 ## First steps
 The Jetson runs Ubuntu 20.04, Noetic is the ROS1 distriution which is targeted at this version of Ubuntu. On your personal PC you should have Ubuntu 20.04 installed (If you're on a windows machine you'll need WSL2).
 - Follow these [instructions](https://learn.microsoft.com/en-us/windows/wsl/install) for setting up WSL, and upgrading to WSL2.
@@ -41,6 +48,10 @@ Each folder has its own README.md file with explanations on code and directory s
 **"openshc_ws" folder**: All the repositories from the CSIRO to help control the robot, and visualise it using RViz or Gazebo, see the README.md file in `openshc_ws > src` for a description on the packages utilised by the 2023 team. Note that modifications have been made to the CSIRO's syropod_remote repository for integration with dronedeploy and robust dynamic control method switching.
 
 **"websocket_ws"/"arachnida_web" folders**: Contains some of the code used to setup a website which displays live data from the LiDAR sensor, and obstacle detection algorithm. This was used by the 2023 team at Ingenuity, however the code will need to be deployed on a new web sever host, Luka Moran was responsible for this and should be contacted if you wish to display similar functionality at Ingenuity.
+
+**".devcontainer"**: Builds a Docker container with ROS Noetic and all dependancies installed. To build simply use 
+```docker build -t cavex-dev .devcontainer/```
+Then, in VScode, using ctrl+shft+p select, 'Reopen in dev container'.
 
 ## Folder Structure
 The folder structure for this repository excluding the openshc_ws and Miscellaneous folders can be seen below. openshc_ws was not included in the below tree as it contained a large number of folders and cluttered up the diagram. Miscellaneous was not included as it does not contain many folders or subdirectories.
@@ -95,11 +106,14 @@ The folder structure for this repository excluding the openshc_ws and Miscellane
 │   ├── launch_scripts
 │   └── launch_services
 │
-└── websocket_ws
-    └── src
-        └── websocket_interface
-            └── src
-                └── dist
+│── websocket_ws
+│    └── src
+│      └── websocket_interface
+│           └── src
+│               └── dist
+│── .devcontainer
+    ├── Dockerfile
+    └── devcontainer.json
 ```
 ## Useful Resources
 |Description        |Link                          |

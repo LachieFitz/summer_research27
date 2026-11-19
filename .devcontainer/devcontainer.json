@@ -1,0 +1,45 @@
+{
+    "name": "CaveX Noetic",
+
+    "build": {
+        "dockerfile": "Dockerfile",
+        "target":"env"
+    },
+
+    "workspaceFolder": "/home/cavex27/CaveX",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/cavex27/CaveX,type=bind",
+
+    "remoteUser": "cavex27",
+    "updateRemoteUserUID": true,
+
+    "runArgs": [
+        "--net=host", //ROS1 TCP ports
+        "--ipc=host", //Qt shared memory for RViz
+        "--device=/dev/input", //gamepad
+        //These ARGs are specific to my (Lachie's) device and different
+        //ones may be needed depedending on host's machine
+        "--device=/dev/dri", //Intel GPU
+        "--group-add=992", //render group for host
+        "--group-add=995" //input group
+    ],
+
+    //X11 socket for host display
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
+    ],
+
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}",
+        "QT_X11_NO_MITSHM": "1"
+    },
+
+    // VS code tool properties
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-iot.vscode-ros"
+            ]
+        }
+    }
+}
